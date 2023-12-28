@@ -12,37 +12,41 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
+
 @0x9d262c6ba6512325;
-using Java = import "/capnp/java.capnp";
+
+using Rust = import "rust.capnp";
+# using Java = import "/capnp/java.capnp";
 using Ref = import "References.capnp";
 using Dir = import "LogicalNetlist.capnp";
-$Java.package("com.xilinx.rapidwright.interchange");
-$Java.outerClassname("DeviceResources");
+# $Java.package("com.xilinx.rapidwright.interchange");
+# $Java.outerClassname("DeviceResources");
 
 using Cxx = import "/capnp/c++.capnp";
 $Cxx.namespace("DeviceResources");
 
-struct HashSet {
+struct HashSet $Rust.name("HashSetStruct") {
     type  @0 : Ref.ImplementationType = enumerator;
     hide  @1 : Bool = true;
 }
 annotation hashSet(*) :HashSet;
 
-struct StringRef {
+struct StringRef $Rust.name("StringRefStruct") {
     type  @0 :Ref.ReferenceType = rootValue;
     field @1 :Text = "strList";
 }
 annotation stringRef(*) :StringRef;
 using StringIdx = UInt32;
 
-struct SiteTypeRef {
+struct SiteTypeRef $Rust.name("SiteTypeStruct"){
     type  @0 :Ref.ReferenceType = root;
     field @1 :Text = "siteTypeList";
 }
 annotation siteTypeRef(*) :SiteTypeRef;
 using SiteTypeIdx = UInt32;
 
-struct BELPinRef {
+struct BELPinRef $Rust.name("BELPinRefStruct") {
     type  @0 :Ref.ReferenceType = parent;
     field @1 :Text = "belPins";
     depth @2 :Int32 = 1;
@@ -50,7 +54,7 @@ struct BELPinRef {
 annotation belPinRef(*) :BELPinRef;
 using BELPinIdx = UInt32;
 
-struct WireRef {
+struct WireRef $Rust.name("WireRefStruct") {
     type  @0 :Ref.ReferenceType = parent;
     field @1 :Text = "wires";
     depth @2 :Int32 = 1;
@@ -58,7 +62,7 @@ struct WireRef {
 annotation wireRef(*) :WireRef;
 using WireIdx = UInt32;
 
-struct WireTypeRef {
+struct WireTypeRef $Rust.name("WireTypeRefStruct") {
     type  @0 :Ref.ReferenceType = rootValue;
     field @1 :Text = "wireTypes";
 }
@@ -68,7 +72,7 @@ using WireTypeIdx = UInt32;
 using WireIDInTileType = UInt32; # ID in Tile Type
 using SitePinIdx = UInt32;
 
-struct TileTypeRef {
+struct TileTypeRef $Rust.name("TileTypeRefStruct") {
     type  @0 :Ref.ReferenceType = parent;
     field @1 :Text = "tileTypeList";
     depth @2 :Int32 = 1;
@@ -79,14 +83,14 @@ using TileTypeIdx = UInt32;
 using TileTypeSiteTypeIdx = UInt32;
 using TileTypeSubTileIdx = UInt16;
 
-struct PIPTimingRef {
+struct PIPTimingRef $Rust.name("PIPTimingRefStruct") {
   type  @0 :Ref.ReferenceType = rootValue;
   field @1 :Text = "pipTimings";
 }
 annotation pipTimingRef(*) :PIPTimingRef;
 using PipTimingIdx = UInt32;
 
-struct NodeTimingRef {
+struct NodeTimingRef $Rust.name("NodeTimingRefStruct") {
   type  @0 :Ref.ReferenceType = rootValue;
   field @1 :Text = "nodeTimings";
 }

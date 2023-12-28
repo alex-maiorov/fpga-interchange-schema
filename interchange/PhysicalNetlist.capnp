@@ -11,24 +11,30 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+
+
 @0xcb2ccd67aa912968;
-using Java = import "/capnp/java.capnp";
-$Java.package("com.xilinx.rapidwright.interchange");
-$Java.outerClassname("PhysicalNetlist");
+
+using Rust = import "rust.capnp";
+
+# using Java = import "/capnp/java.capnp";
+# $Java.package("com.xilinx.rapidwright.interchange");
+# $Java.outerClassname("PhysicalNetlist");
 
 using Cxx = import "/capnp/c++.capnp";
 $Cxx.namespace("PhysicalNetlist");
 
 using Ref = import "References.capnp";
 
-struct StringRef {
+struct StringRef $Rust.name("StringRefStruct") {
     type  @0 :Ref.ReferenceType = rootValue;
     field @1 :Text = "strList";
 }
 annotation stringRef(*) :StringRef;
 using StringIdx = UInt32;
 
-struct HashSet {
+struct HashSet $Rust.name("HashSetStruct") {
     type  @0 : Ref.ImplementationType = enumerator;
     hide  @1 : Bool = true;
 }

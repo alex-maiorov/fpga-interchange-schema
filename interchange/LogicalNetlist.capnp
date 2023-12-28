@@ -12,29 +12,33 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+using Rust = import "rust.capnp";
+
 @0xcb2ccd67aa912967;
-using Java = import "/capnp/java.capnp";
+
+
+# using Java = import "/capnp/java.capnp";
 using Ref = import "References.capnp";
-$Java.package("com.xilinx.rapidwright.interchange");
-$Java.outerClassname("LogicalNetlist");
+# $Java.package("com.xilinx.rapidwright.interchange");
+# $Java.outerClassname("LogicalNetlist");
 
 using Cxx = import "/capnp/c++.capnp";
 $Cxx.namespace("LogicalNetlist");
 
-struct HashSet {
+struct HashSet $Rust.name("HashSetStruct") {
     type  @0 : Ref.ImplementationType = enumerator;
     hide  @1 : Bool = true;
 }
 annotation hashSet(*) :HashSet;
 
-struct StringRef {
+struct StringRef $Rust.name("StringRefStruct") {
     type  @0 :Ref.ReferenceType = rootValue;
     field @1 :Text = "strList";
 }
 annotation stringRef(*) :StringRef;
 using StringIdx = UInt32;
 
-struct PortRef {
+struct PortRef $Rust.name("PortRefStruct") {
     type  @0 :Ref.ReferenceType = parent;
     field @1 :Text = "portList";
     depth @2 :Int32 = 1;
@@ -42,7 +46,7 @@ struct PortRef {
 annotation portRef(*) :PortRef;
 using PortIdx = UInt32;
 
-struct CellRef {
+struct CellRef $Rust.name("CellRefStruct") {
     type  @0 :Ref.ReferenceType = parent;
     field @1 :Text = "cellDecls";
     depth @2 :Int32 = 1;
@@ -50,7 +54,7 @@ struct CellRef {
 annotation cellRef(*) :CellRef;
 using CellIdx = UInt32;
 
-struct InstRef {
+struct InstRef $Rust.name("InstRefStruct") {
     type  @0 :Ref.ReferenceType = parent;
     field @1 :Text = "instList";
     depth @2 :Int32 = 1;
